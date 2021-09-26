@@ -5,14 +5,16 @@ import { Godam } from "godam";
 export * from "./decorators";
 
 
-declare module "mahal" {
-    export interface Component {
-        store: Godam;
+// declare module "mahal" {
+//     class Component {
+//         store: Godam;
+//     }
+// }
+
+export class MahalStore extends Plugin {
+    setup(app: Mahal, store) {
+        app.global['store'] = store;
     }
 }
 
-export default class MahalStore extends Plugin {
-    setup(app: Mahal, store) {
-        app.global.store = store;
-    }
-}
+export default MahalStore;

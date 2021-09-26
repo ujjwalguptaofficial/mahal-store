@@ -1,0 +1,47 @@
+<html>
+    <div>
+        <div>{{counter}}</div>
+       <button on:click="increment">Increment</button>
+       <button on:click="decrement">Decrement</button>
+   </div>
+</html>
+<script>
+import {Component, Computed, Reactive} from "mahal";
+import {State} from "mahal-store";
+
+export default class extends Component {
+
+    @State('count')
+    counter 
+
+    @Reactive fuck =5;
+
+    
+    increment() {
+        (this as any).store.set('incrementCount');
+        console.log("triggered increment", 
+        (this as any).store.get('count')
+        );
+    }
+
+    decrement() {
+        --this.counter;
+    }
+}
+</script>
+
+<style lang="scss">
+body{
+    background:red;
+    button{
+        border:1px solid blue;
+        width:200px;
+        margin-left:20px;
+    }
+}
+</style>
+<style>
+body{
+    font-size:30px;
+}
+</style>

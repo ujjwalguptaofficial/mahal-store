@@ -1,11 +1,12 @@
 import { Godam } from "godam";
 
 // tslint:disable-next-line
-export const Expression = (key: string, room?: string): MethodDecorator => {
+export const Expression = function (key: string, room?: string) {
     if (room) {
         key = key + "@" + room;
     }
-    return ((target: any, methodName: string, descriptor: PropertyDescriptor) => {
+    return (target: any, methodName: string) => {
+        // console.log("descriptor", descriptor);
         const store: Godam = target._app.store;
         if (!store) {
             throw "store not registered";
@@ -17,5 +18,5 @@ export const Expression = (key: string, room?: string): MethodDecorator => {
             setValue();
         });
         setValue();
-    });
+    };
 };

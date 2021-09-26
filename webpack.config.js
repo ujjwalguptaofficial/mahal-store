@@ -35,7 +35,7 @@ function getConfig(target) {
             path: path.resolve(__dirname, 'dist/'),
             filename: target.name,
             library: 'MahalStore',
-            libraryTarget: target.type
+            libraryTarget: 'umd'
         },
         plugins: [
             // new CopyPlugin({
