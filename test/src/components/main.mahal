@@ -1,20 +1,21 @@
 <html>
     <div>
         <div>{{counter}}</div>
+        <div>{{countPlus5}}</div>
        <button on:click="increment">Increment</button>
        <button on:click="decrement">Decrement</button>
    </div>
 </html>
 <script>
 import {Component, Computed, Reactive} from "mahal";
-import {State} from "mahal-store";
+import {State,Mutation,Expression } from "mahal-store";
 
 export default class extends Component {
 
     @State('count')
     counter 
 
-    @Reactive fuck =5;
+    @Expression('countPlus5') countPlus5;
 
     
     increment() {
@@ -24,9 +25,8 @@ export default class extends Component {
         );
     }
 
-    decrement() {
-        --this.counter;
-    }
+    @Mutation('decrementCount')
+    decrement ;
 }
 </script>
 

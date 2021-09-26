@@ -8,9 +8,13 @@ export class RootMutation extends Mutation {
     count(value) {
         this.state.count = value;
     }
-    
+
     incrementCount() {
         ++this.state.count;
+    }
+
+    decrementCount() {
+        --this.state.count;
     }
 }
 
