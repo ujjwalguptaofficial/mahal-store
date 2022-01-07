@@ -1,32 +1,23 @@
 <html>
-    <div>
-        <div>{{counter}}</div>
-        <div>{{countPlus5}}</div>
-       <button on:click="increment">Increment</button>
-       <button on:click="decrement">Decrement</button>
-   </div>
+<div>
+	<Students />
+</div>
 </html>
 <script>
-import {Component, Computed, Reactive} from "mahal";
-import {State,Mutation,Expression } from "mahal-store";
 
-export default class extends Component {
+import { Children } from "mahal";
+import { State, Mutation, Expression } from "mahal-store";
+import { BaseComponent } from "./base_component";
+import Students from "./students.mahal";
 
-    @State('count')
-    counter 
 
-    @Expression('countPlus5') countPlus5;
+@Children({
+	Students
+})
+export default class extends BaseComponent {
 
-    
-    increment() {
-        (this as any).store.set('incrementCount');
-        console.log("triggered increment", 
-        (this as any).store.get('count')
-        );
-    }
 
-    @Mutation('decrementCount')
-    decrement ;
+	 
 }
 </script>
 
@@ -41,7 +32,7 @@ body{
 }
 </style>
 <style>
-body{
-    font-size:30px;
+body {
+    font-size: 30px;
 }
 </style>

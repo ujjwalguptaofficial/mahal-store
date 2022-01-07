@@ -1,0 +1,160 @@
+---
+summary: 
+  The component renders the all students from store. It also allows us to create new student, edit student and delete student.
+dateCreated: 12/2/2022
+authors:
+	author1:
+	 ujjwal gupta
+---
+<html>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Gender</th>
+		<th>Country</th>
+		<th>City</th>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" :value="newStudent.name" on:input="newStudentName" />
+		</td>
+		<td>
+			<input type="text" #model(newStudent.gender) />
+		</td>
+		<td>
+			<input type="text" #model(newStudent.country) />
+		</td>
+		<td>
+			<input type="text" #model(newStudent.city) />
+		</td>
+		<td>
+			<button on:click="add">Add</button>
+		</td>
+		<td>
+			<button on:click="clear">Clear</button>
+		</td>
+	</tr>
+	<fragment #for(student in students)>
+		<tr #if(editStudent.id==student.id)>
+			<td>
+				<input type="text" #model(editStudent.name) />
+			</td>
+			<td>
+				<input type="text" #model(editStudent.gender) />
+			</td>
+			<td>
+				<input type="text" #model(editStudent.country) />
+			</td>
+			<td>
+				<input type="text" #model(editStudent.city) />
+			</td>
+			<td>
+				<button on:click="()=>{updateStudent(editStudent)}">Update</button>
+			</td>
+			<td>
+				<button on:click="cancelUpdate">Cancel</button>
+			</td>
+		</tr>
+		<tr #else>
+			<td>{{ student.name }}</td>
+			<td>{{ student.gender }}</td>
+			<td>{{ student.country }}</td>
+			<td>{{ student.city }}</td>
+			<td>
+				<button on:click="()=>{edit(student.id)}">Edit</button>
+			</td>
+			<td>
+				<button on:click="()=>{remove(student.id)}">Delete</button>
+			</td>
+		</tr>
+	</fragment>
+</table>
+</html>
+<script>
+import { Reactive } from "mahal";
+import { Expression, State, Task } from "mahal-store";
+import { BaseComponent } from "./base_component";
+
+export default class extends BaseComponent {
+	
+	@State('students')
+	students;
+
+	@Expression('studentById')
+	studentById
+
+	@Task('removeStudent')
+	removeStudent
+
+	@Task('updateStudent')
+	updateStudentById
+
+	@Task('addStudent')
+	addStudent
+   
+   @Reactive
+    newStudent = {};
+
+   @Reactive
+    editStudent = {};
+
+    constructor(){
+      super();
+      this.clear();
+    }
+
+	newStudentName(e){
+		const value = e; //.target.value;
+		(this.newStudent as any).name = value;
+	}
+    
+    async add() {
+      this.addStudent(this.newStudent);
+      this.clear();
+    }
+
+    clear() {
+      this.newStudent = {
+        name: "",
+        gender: "",
+        country: "",
+        city: "",
+		isNewStudent:true
+      };
+    }
+
+    edit(id) {
+      const student = this.studentById(id);
+      this.editStudent = {
+        id: student.id,
+        name: student.name,
+        gender: student.gender,
+        country: student.country,
+        city: student.city,
+      };
+    }
+
+	remove(id) {
+      const noOfStudentRemoved =   this.removeStudent(id);
+      if (noOfStudentRemoved > 0) {
+        this.emit("remove-item");
+      }
+    }
+
+    async updateStudent() {
+      const isStudentUpdated =   this.updateStudentById(
+        this.editStudent
+		);
+		if (isStudentUpdated) {
+			this.cancelUpdate();
+		}
+		console.log("editStudent", this.editStudent);
+		console.log("newStudent", this.newStudent);
+	}
+
+	cancelUpdate() {
+		this.editStudent = {};
+	}
+};
+</script>
+

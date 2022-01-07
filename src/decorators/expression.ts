@@ -1,40 +1,35 @@
+import { Godam } from "godam";
+import { Component, LIFECYCLE_EVENT } from "mahal";
 
 
 // tslint:disable-next-line
 export const Expression = function (key: string, room?: string): PropertyDecorator {
-    console.log("thisdd", this);
     if (room) {
         key = key + "@" + room;
     }
+    let isEventSubscribed = false;
     return (target: any, propName: string) => {
         Object.defineProperty(target, propName, {
             get() {
+                const comp: Component = this;
+                const store: Godam = comp.global.store;
+                store.shouldCallExpression = false;
+                const expressionValue = store.eval(key);
+                store.shouldCallExpression = true;
+                if (isEventSubscribed) {
+                    return expressionValue;
+                }
                 const watchKey = "expression." + key;
-                const onceCb = (newValue) => {
-                    this.store.unwatch(watchKey, onceCb);
-                    this.setState(propName, newValue);
+                const cb = (newValue) => {
+                    comp.setState(propName, newValue);
                 };
-                this.store.watch(watchKey, onceCb);
-                return this.store.eval(key);
+                store.watch(watchKey, cb);
+                comp.on(LIFECYCLE_EVENT.Destroy, () => {
+                    store.unwatch(watchKey, cb);
+                })
+                isEventSubscribed = true;
+                return expressionValue;
             }
         })
     }
-    // const desc = (target: any, methodName: string) => {
-    //     nextTick(() => {
-    //         target.on('create', () => {
-    //             const store: Godam = target._app.store;
-    //             if (!store) {
-    //                 throw "store not registered";
-    //             }
-    //             const setValue = () => {
-    //                 target.setState(methodName, store.get(key));
-    //             }
-    //             store.on(key, (newValue) => {
-    //                 setValue();
-    //             });
-    //             setValue();
-    //         })
-    //     })
-    // };
-    // return desc;
 };

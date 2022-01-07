@@ -4,16 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack serve",
-    "install:lib": "npm i ../mahal-store-1.0.0.tgz"
+    "test": "cross-env NODE_ENV=test karma start karma.conf.js",
+    "install:test": "npm run install:lib && npm run test",
+    "install:lib": "node install_lib.js",
+    "dev": "webpack serve"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.3.0",
     "html-webpack-plugin": "^5.3.2",
-    "mahal-webpack-loader": "^0.4.0",
+    "mahal-webpack-loader": "^0.6.0",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.0",
@@ -22,6 +23,7 @@
     "webpack-dev-server": "^4.3.0"
   },
   "dependencies": {
+    "mahal-html-compiler": "^0.8.0",
     "mahal-store": "file:../mahal-store-1.0.0.tgz",
     "vue": "^2.6.14"
   }

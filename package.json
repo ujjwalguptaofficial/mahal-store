@@ -5,7 +5,7 @@
   "main": "dist/mahal-store.commonjs2.js",
   "types": "dist/ts/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd test && npm run install:test",
     "build": "webpack --config webpack.config.js",
     "build:pack": "npm run build:dev && npm pack",
     "build:dev": "cross-env NODE_ENV=development npm run build"
@@ -21,14 +21,17 @@
   },
   "homepage": "https://github.com/ujjwalguptaofficial/mahal-store#readme",
   "dependencies": {
-    "godam": "^1.0.0"
+    "godam": "^1.0.3"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "mahal": "^0.10.0",
+    "mahal": "^0.14.0",
     "ts-loader": "^7.0.4",
     "typescript": "^3.9.7",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0"
+  },
+  "peerDependencies": {
+    "mahal": "^0.10.0"
   }
 }

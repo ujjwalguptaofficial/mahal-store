@@ -1,5 +1,7 @@
 import { Godam } from "godam";
-import { nextTick } from "mahal";
+import { Component, LIFECYCLE_EVENT, nextTick } from "mahal";
+
+const arrayMethodsToWatch = ["push", "pop", "splice"];
 
 // tslint:disable-next-line
 export const State = function (key: string, room?: string): PropertyDecorator {
@@ -7,34 +9,45 @@ export const State = function (key: string, room?: string): PropertyDecorator {
     if (room) {
         key = key + "@" + room;
     }
+    let methods = [];
+    let isEventSubscribed = false;
     return (target: any, propName: string) => {
         Object.defineProperty(target, propName, {
             get() {
+                const comp: Component = this;
+                const store: Godam = comp.global.store;
+                const valueFromStore = store.get(key);
+                if (isEventSubscribed) {
+                    return valueFromStore
+                }
+
                 const onceCb = (newValue) => {
-                    this.store.unwatch(key, onceCb);
-                    this.setState(propName, newValue);
+                    comp.setState(propName, newValue);
                 };
-                this.store.watch(key, onceCb);
-                return this.store.get(key);
+                store.watch(key, onceCb);
+                if (Array.isArray(valueFromStore)) {
+                    arrayMethodsToWatch.forEach(methodName => {
+                        const arrayKey = `${key}.${methodName}`;
+                        const method = (newValue) => {
+                            comp.setState(arrayKey, newValue);
+                        }
+                        store.watch(arrayKey, method);
+                        methods.push(method);
+                    })
+                }
+
+                comp.on(LIFECYCLE_EVENT.Destroy, () => {
+                    store.unwatch(key, onceCb);
+                    arrayMethodsToWatch.forEach((methodName, i) => {
+                        const arrayKey = `${key}.${methodName}`;
+                        store.unwatch(arrayKey, methods[i]);
+                    });
+                    methods = [];
+                })
+                isEventSubscribed = true;
+                return valueFromStore;
             }
         })
     }
-    // const desc = (target: any, methodName: string) => {
-    //     nextTick(() => {
-    //         target.on('create', () => {
-    //             const store: Godam = target._app.store;
-    //             if (!store) {
-    //                 throw "store not registered";
-    //             }
-    //             const setValue = () => {
-    //                 target.setState(methodName, store.get(key));
-    //             }
-    //             store.on(key, (newValue) => {
-    //                 setValue();
-    //             });
-    //             setValue();
-    //         })
-    //     })
-    // };
-    // return desc;
+    
 };

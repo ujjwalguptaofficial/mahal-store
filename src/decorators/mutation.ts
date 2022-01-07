@@ -1,4 +1,5 @@
 import { Godam } from "godam";
+import { Component } from "mahal";
 
 // tslint:disable-next-line
 export const Mutation = (key: string, room?: string): PropertyDecorator => {
@@ -7,7 +8,9 @@ export const Mutation = (key: string, room?: string): PropertyDecorator => {
     }
     return ((target: any, methodName: string) => {
         target[methodName] = function (...payload) {
-            this.store.set(key, ...payload);
+            const comp: Component = this;
+            const store: Godam = comp.global.store;
+            store.set(key, ...payload);
         }
     });
 };
