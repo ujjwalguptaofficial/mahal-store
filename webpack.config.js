@@ -1,6 +1,8 @@
 const path = require('path');
-// const CopyPlugin = require('copy-webpack-plugin');
-// const merge = require('webpack-merge');
+const CopyPlugin = require('copy-webpack-plugin');
+const SmartBannerPlugin = require('smart-banner-webpack-plugin');
+const banner = require('./build_helper/licence');
+
 const isDev = process.env.NODE_ENV === "development";
 const appName = "mahal-store";
 const libraryTarget = [{
@@ -38,11 +40,12 @@ function getConfig(target) {
             libraryTarget: 'umd'
         },
         plugins: [
-            // new CopyPlugin({
-            //     patterns: [
-            //         { from: 'src/middleware.js', to: '' },
-            //     ],
-            // }),
+            // new SmartBannerPlugin(banner),
+            new CopyPlugin({
+                patterns: [
+                    { from: path.resolve('build_helper', 'npm.export.js'), to: '' },
+                ],
+            }),
         ]
     };
 

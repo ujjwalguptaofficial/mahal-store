@@ -1,14 +1,16 @@
 {
   "name": "mahal-store",
   "version": "1.0.0",
-  "description": "",
+  "description": "Store module for mahal framework.",
   "main": "dist/mahal-store.commonjs2.js",
   "types": "dist/ts/index.d.ts",
   "scripts": {
     "test": "cd test && npm run install:test",
     "build": "webpack --config webpack.config.js",
     "build:pack": "npm run build:dev && npm pack",
-    "build:dev": "cross-env NODE_ENV=development npm run build"
+    "build:dev": "cross-env NODE_ENV=development npm run build",
+    "build:prod": "cross-env NODE_ENV=production npm run build",
+    "deploy": "npm run build:dev && npm run build:prod"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,8 @@
     "godam": "^1.0.3"
   },
   "devDependencies": {
+    "smart-banner-webpack-plugin": "^3.0.1",
+    "copy-webpack-plugin": "^6.1.1",
     "cross-env": "^7.0.3",
     "mahal": "^0.14.0",
     "ts-loader": "^7.0.4",
