@@ -16,16 +16,28 @@ describe('Counter', function () {
         const counter = component.find('#divCounter');
         // console.log('counter', counter);
         expect(counter.innerHTML).equal('0');
+        expect(component.find('#divCounter5').innerHTML).equal('5');
+        expect(component.find('#divCounter').innerHTML).equal('0');
     });
 
     it('increment 5 times', async function () {
         const btn = component.find("#btnIncrement");
-        console.log('btn', btn);
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 5; i++) {
             btn.click();
         }
-        // await component.waitFor('update');
-        // expect(component['counter']).equal(5);
+        await component.waitFor('update');
+        expect(component['counter']).equal(5);
+        expect(component.find('#divCounter5').innerHTML).equal('10');
+        expect(component.find('#divCounter').innerHTML).equal('5');
+    });
+
+    it('decrement', async function () {
+        const btn = component.find("#btnDecrement");
+        btn.click();
+        await component.waitFor('update');
+        expect(component['counter']).equal(4);
+        expect(component.find('#divCounter5').innerHTML).equal('9');
+        expect(component.find('#divCounter').innerHTML).equal('4');
     });
 });
 

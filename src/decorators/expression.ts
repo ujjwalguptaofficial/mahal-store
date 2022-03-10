@@ -21,7 +21,7 @@ export const Expression = function (key: string, room?: string): PropertyDecorat
                 }
                 const watchKey = "expression." + key;
                 const cb = (newValue) => {
-                    comp.setState(propName, newValue);
+                    comp['__emitStateChange__'](propName, newValue);
                 };
                 store.watch(watchKey, cb);
                 comp.on(LIFECYCLE_EVENT.Destroy, () => {

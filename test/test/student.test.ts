@@ -22,21 +22,98 @@ describe('Student', function () {
         expect(cols).length(6);
     });
 
-    // it('click on cells add student', async function () {
-    //     const table = component.find('table');
-    //     let rows = table.querySelectorAll('tr');
-    //     const button = rows[0].querySelector('td button') as HTMLElement;
-    //     button.click();
+    it('add student', async function () {
+        const table = component.element;
+        let rows = table.querySelectorAll('tr')
+        const row = rows[1];
+        const name = row.querySelectorAll('td')[0].querySelector('input') as HTMLElement;
+        const gender = row.querySelectorAll('td')[1].querySelector('input') as HTMLElement;
+        const country = row.querySelectorAll('td')[2].querySelector('input') as HTMLElement;
+        const city = row.querySelectorAll('td')[3].querySelector('input') as HTMLElement;
+        const data = {
+            name: 'ujjwal',
+            gender: 'male',
+            country: 'india',
+            city: 'bangalore',
+            id: 1,
+            // isN
+        }
+        setInputValue(name, data.name);
+        setInputValue(gender, data.gender);
+        setInputValue(country, data.country);
+        setInputValue(city, data.city);
+        const btnAdd = row.querySelectorAll('td')[4].querySelector('button') as HTMLElement;
 
-    //     await component.waitFor('update');
+        btnAdd.click();
+        await component.waitFor('update');
 
-    //     rows = table.querySelectorAll('tr');
-    //     expect(rows).length(2);
 
-    //     const cols = rows[1].querySelectorAll('td');
-    //     expect(cols).length(2);
-    //     expect(cols[0].innerHTML).equal(component.students[1].name);
-    // });
+
+        rows = table.querySelectorAll('tr');
+        const students = component.resolve('students');
+        expect(rows).length(3);
+        expect(students).length(1);
+
+        expect(students[0]).eql(data);
+    });
+
+    it('edit student', async function () {
+        const table = component.element;
+        let rows = table.querySelectorAll('tr')
+        let row = rows[2];
+        const btnEdit = row.querySelector('.edit') as HTMLButtonElement;
+        btnEdit.click();
+        await component.waitFor('update');
+        rows = table.querySelectorAll('tr')
+        row = rows[2];
+        // console.log('row', row.outerHTML);
+        const name = row.querySelectorAll('td')[0].querySelector('input') as HTMLElement;
+        const gender = row.querySelectorAll('td')[1].querySelector('input') as HTMLElement;
+        const country = row.querySelectorAll('td')[2].querySelector('input') as HTMLElement;
+        const city = row.querySelectorAll('td')[3].querySelector('input') as HTMLElement;
+        const data = {
+            name: 'ujjwal gupta',
+            gender: 'MALE',
+            country: 'India',
+            city: 'Bangalore',
+            id: 1,
+            // isN
+        }
+        setInputValue(name, data.name);
+        setInputValue(gender, data.gender);
+        setInputValue(country, data.country);
+        setInputValue(city, data.city);
+
+        const btnUpdate = row.querySelectorAll('td')[4].querySelector('button') as HTMLElement;
+
+        btnUpdate.click();
+        await component.waitFor('update');
+
+
+
+        rows = table.querySelectorAll('tr');
+        const students = component.resolve('students');
+        expect(rows).length(3);
+        expect(students).length(1);
+
+        expect(students[0]).eql(data);
+    });
+
+    it('delete student', async function () {
+        const table = component.element;
+        let rows = table.querySelectorAll('tr')
+        let row = rows[2];
+        const btnEdit = row.querySelector('.delete') as HTMLButtonElement;
+        btnEdit.click();
+        await component.waitFor('update');
+        rows = table.querySelectorAll('tr')
+        row = rows[2];
+
+        const students = component.resolve('students');
+        expect(rows).length(2);
+        expect(students).length(0);
+
+    });
 
     // it('click on input add student', async function () {
     //     const input = component.find('.input-container input');

@@ -57,10 +57,10 @@ dateCreated: 12/2/2022
 			<td>{{ student.country }}</td>
 			<td>{{ student.city }}</td>
 			<td>
-				<button on:click="()=>{edit(student.id)}">Edit</button>
+				<button class="edit" on:click="()=>{edit(student.id)}">Edit</button>
 			</td>
 			<td>
-				<button on:click="()=>{remove(student.id)}">Delete</button>
+				<button class="delete" on:click="()=>{remove(student.id)}">Delete</button>
 			</td>
 		</tr>
 	</fragment>
@@ -99,7 +99,7 @@ export default class extends BaseComponent {
     }
 
     newStudentName(e) {
-        const value = e; //.target.value;
+        const value = e.target.value;
         (this.newStudent as any).name = value;
     }
 
@@ -114,7 +114,7 @@ export default class extends BaseComponent {
             gender: "",
             country: "",
             city: "",
-            isNewStudent: true,
+            // isNewStudent: true,
         };
     }
 

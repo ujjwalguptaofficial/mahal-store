@@ -1,4 +1,4 @@
----
+---times
 name: count.mahal
 description:
 dateCreated:
@@ -9,7 +9,7 @@ dateCreated:
 	<div id="divCounter">{{counter}}</div>
 	<div id="divCounter5">{{countPlus5}}</div>
 	<button id="btnIncrement" @click="increment">Increment</button>
-	<button @click="increment">Decrement</button>
+	<button @click="decrement" id="btnDecrement">Decrement</button>
 </div>
 </html>
 
@@ -22,6 +22,7 @@ export default class extends BaseComponent {
     @State("count")
     counter;
 
+    @Expression('countPlus5')
     countPlus5;
 
     increment() {
