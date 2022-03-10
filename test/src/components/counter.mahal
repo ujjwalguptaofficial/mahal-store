@@ -1,0 +1,40 @@
+---
+name: count.mahal
+description:
+dateCreated:
+---
+
+<html>
+<div>
+	<div id="divCounter">{{counter}}</div>
+	<div id="divCounter5">{{countPlus5}}</div>
+	<button id="btnIncrement" @click="increment">Increment</button>
+	<button @click="increment">Decrement</button>
+</div>
+</html>
+
+<script>
+import { Component, Computed, Reactive } from "mahal";
+import { State, Mutation, Expression } from "mahal-store";
+import { BaseComponent } from "./base_component";
+
+export default class extends BaseComponent {
+    @State("count")
+    counter;
+
+    countPlus5;
+
+    increment() {
+        this.store.set("incrementCount");
+        console.log("triggered increment", this.store.get("count"));
+    }
+
+    @Mutation("decrementCount")
+    decrement;
+}
+</script>
+
+ 
+
+<style>
+</style>

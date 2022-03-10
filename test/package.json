@@ -4,27 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test karma start karma.conf.js",
     "install:test": "npm run install:lib && npm run test",
     "install:lib": "node install_lib.js",
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "install:build": "npm run install:lib && npm run build",
+    "build": "webpack",
+    "start": "npm run dev",
+    "test": "cross-env BUILD_ENV=test mochapack --require ./test/setup.js --webpack-config webpack.config.js \"test/**/*.test.ts\"  --full-trace"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.2.16",
+    "@types/mocha": "^8.2.3",
+    "@types/node": "^17.0.21",
+    "chai": "^4.3.4",
     "cross-env": "^7.0.3",
     "css-loader": "^6.3.0",
     "html-webpack-plugin": "^5.3.2",
-    "mahal-webpack-loader": "^0.6.0",
-    "sass": "^1.42.1",
-    "sass-loader": "^12.1.0",
-    "style-loader": "^3.3.0",
-    "webpack": "^5.54.0",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.3.0",
-    "@types/chai": "^4.2.16",
-    "@types/mocha": "^8.2.2",
-    "chai": "^4.3.4",
+    "jsdom": "^19.0.0",
     "karma": "^6.3.2",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.0",
@@ -32,11 +30,22 @@
     "karma-mocha": "^2.0.1",
     "karma-mocha-reporter": "^2.2.5",
     "karma-webpack": "^4.0.2",
+    "mahal-test-utils": "^1.1.0",
+    "mahal-webpack-loader": "^1.1.0",
     "mocha": "^8.3.2",
-    "puppeteer": "^5.5.0"
+    "mochapack": "^2.1.4",
+    "puppeteer": "^5.5.0",
+    "sass": "^1.42.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.3.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.54.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.3.0"
   },
   "dependencies": {
-    "mahal-html-compiler": "^0.8.0",
+    "mahal-html-compiler": "^1.0.0",
     "mahal-store": "file:../mahal-store-1.0.0.tgz"
   }
 }

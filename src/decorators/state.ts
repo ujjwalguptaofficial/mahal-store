@@ -16,23 +16,30 @@ export const State = function (key: string, room?: string): PropertyDecorator {
             get() {
                 const comp: Component = this;
                 const store: Godam = comp.global.store;
+                if (process.env.NODE_ENV !== "production") {
+                    if (store == null) {
+                        throw "store is not defined, please install 'mahal-store' plugin.";
+                    }
+                }
                 const valueFromStore = store.get(key);
                 if (isEventSubscribed) {
                     return valueFromStore
                 }
+                const emitChange = comp['__emitStateChange__'].bind(this);
 
                 const onceCb = (newValue) => {
-                    comp.setState(propName, newValue);
+                    emitChange(propName, newValue);
                 };
                 store.watch(key, onceCb);
                 if (Array.isArray(valueFromStore)) {
                     arrayMethodsToWatch.forEach(methodName => {
                         const arrayKey = `${key}.${methodName}`;
-                        const method = (newValue) => {
-                            comp.setState(arrayKey, newValue);
+                        const watchCb = (newValue) => {
+                            emitChange(arrayKey, newValue);
+                            // comp.setState(arrayKey, newValue);
                         }
-                        store.watch(arrayKey, method);
-                        methods.push(method);
+                        store.watch(arrayKey, watchCb);
+                        methods.push(watchCb);
                     })
                 }
 
@@ -49,5 +56,5 @@ export const State = function (key: string, room?: string): PropertyDecorator {
             }
         })
     }
-    
+
 };

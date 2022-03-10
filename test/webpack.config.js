@@ -1,11 +1,8 @@
 const path = require('path');
 console.log("path", path.resolve(__dirname, 'bin/'))
-
-// const TajPlugin = require('../src/plugin');
-const TajPlugin = require('mahal-webpack-loader/lib/plugin');
-
+const MahalPlugin = require('mahal-webpack-loader/lib/plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.ts',
@@ -65,7 +62,10 @@ module.exports = {
         path: path.resolve(__dirname, 'bin/')
     },
     plugins: [
-        new TajPlugin({
+        new webpack.DefinePlugin({
+            'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV),
+        }),
+        new MahalPlugin({
             lang: 'ts'
         }),
         new HtmlWebPackPlugin({

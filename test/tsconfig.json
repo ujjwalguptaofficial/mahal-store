@@ -7,9 +7,9 @@
         "sourceMap": true,
         "inlineSources": true,
         "moduleResolution": "node",
-        "target": "es5",
+        "target": "es6",
         "preserveConstEnums": true,
-        "declaration": true,
+        // "declaration": true,
         // "declarationDir": "./dist/ts",
         "module": "es6",
         "lib": [
@@ -18,9 +18,6 @@
         ],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "typeRoots": [
-            "./extra/mahal.config.d.ts"
-        ]
     },
     // "include": ["src/*"]
 }

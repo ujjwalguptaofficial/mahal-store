@@ -2,5 +2,12 @@ import { Godam } from "godam";
 import { Component } from "mahal";
 
 export class BaseComponent extends Component {
-    store: Godam;
+
+    constructor() {
+        super();
+    }
+
+    get store() {
+        return this.global.store as Godam;
+    }
 }

@@ -9,10 +9,11 @@ import { Children } from "mahal";
 import { State, Mutation, Expression } from "mahal-store";
 import { BaseComponent } from "./base_component";
 import Students from "./students.mahal";
+import Counter from "./counter.mahal";
 
 
 @Children({
-	Students
+	Students,Counter
 })
 export default class extends BaseComponent {
 

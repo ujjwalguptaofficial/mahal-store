@@ -6,6 +6,7 @@
   "types": "dist/ts/index.d.ts",
   "scripts": {
     "test": "cd test && npm run install:test",
+    "build:test": "npm run build:pack && npm run test",
     "build": "webpack --config webpack.config.js",
     "build:pack": "npm run build:dev && npm pack",
     "build:dev": "cross-env NODE_ENV=development npm run build",
@@ -23,19 +24,20 @@
   },
   "homepage": "https://github.com/ujjwalguptaofficial/mahal-store#readme",
   "dependencies": {
-    "godam": "^1.0.3"
+    "godam": "^1.0.7"
   },
   "devDependencies": {
-    "smart-banner-webpack-plugin": "^3.0.1",
+    "@types/chai": "^4.3.0",
     "copy-webpack-plugin": "^6.1.1",
     "cross-env": "^7.0.3",
-    "mahal": "^0.14.0",
+    "mahal": "^1.1.0",
+    "smart-banner-webpack-plugin": "^3.0.1",
     "ts-loader": "^7.0.4",
     "typescript": "^3.9.7",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
-    "mahal": "^0.10.0"
+    "mahal": "^1.1.0"
   }
 }

@@ -1,10 +1,4 @@
 declare module "*.mahal" {
-    const value: any; // Add better type definitions here if desired.
-    export default value;
+    import { Component } from "mahal";
+    export default Component;
 }
-
-// declare module "*.vue" {
-//     import Vue from "vue";
-//     export default Vue;
-// }
-
