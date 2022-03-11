@@ -1,12 +1,14 @@
-import { Godam, Mutation, Expression, Task } from "godam";
+import { Godam, Mutation, Expression, Task, Computed, clone } from "godam";
 
 export class State {
     count = 0;
     lastStudentId = 0;
     students = [];
+    fruits = [];
+    initialFruits = ["Banana", "Orange", "Apple", "Mango"]
 }
 
-export class RootMutation extends Mutation {
+export class RootMutation extends Mutation<State> {
     count(value) {
         this.state.count = value;
     }
@@ -26,9 +28,15 @@ export class RootMutation extends Mutation {
     lastStudentId(value) {
         this.state.lastStudentId = value;
     }
+
+    initializeFruits() {
+        this.state.fruits = clone(
+            this.state.initialFruits
+        );
+    }
 }
 
-export class RootTask extends Task {
+export class RootTask extends Task<State> {
     addStudent(student) {
         let lastStudentId = this.get("lastStudentId");
         student.id = ++lastStudentId;
@@ -58,7 +66,7 @@ export class RootTask extends Task {
 
 }
 
-export class RootExpression extends Expression {
+export class RootExpression extends Expression<State> {
     constructor() {
         super();
         this.markComputed('countPlus5', 'count');
@@ -71,6 +79,11 @@ export class RootExpression extends Expression {
     studentById(id) {
         const students = this.get('students');
         return students.find((qry) => qry.id === id);
+    }
+
+    @Computed()
+    fruitsLength() {
+        return this.get('fruits').length;
     }
 }
 

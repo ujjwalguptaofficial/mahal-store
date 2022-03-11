@@ -1,11 +1,10 @@
 import { Godam } from "godam";
 import { Component, LIFECYCLE_EVENT, nextTick } from "mahal";
 
-const arrayMethodsToWatch = ["push", "pop", "splice"];
+const arrayMethodsToWatch = ["push", "pop", "splice", "shift", "unshift", "reverse", "add"];
 
 // tslint:disable-next-line
 export const State = function (key: string, room?: string): PropertyDecorator {
-    console.log("thisdd", this);
     if (room) {
         key = key + "@" + room;
     }

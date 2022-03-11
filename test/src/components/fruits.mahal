@@ -1,0 +1,26 @@
+<html>
+<div>
+	<p :for(fruit,index in fruits)>
+		{{index}}-{{fruit}}
+	</p>
+</div>
+</html>
+<script>
+import { clone, Component } from "mahal";
+import { Mutation, State } from "mahal-store";
+
+export default class extends Component {
+    @State("fruits")
+    fruits;
+
+    get initialFruits() {
+        return clone(this.global.store.get("initialFruits"));
+    }
+
+    @Mutation("initializeFruits") setInitial;
+
+    onInit() {
+        this.setInitial();
+    }
+}
+</script>
