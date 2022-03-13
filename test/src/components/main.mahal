@@ -1,6 +1,6 @@
 <html>
 <div>
-	<Counter />
+	<Veggie />
 </div>
 </html>
 <script>
@@ -10,10 +10,11 @@ import { State, Mutation, Expression } from "mahal-store";
 import { BaseComponent } from "./base_component";
 import Students from "./students.mahal";
 import Counter from "./counter.mahal";
+import Veggie from "./veggie.mahal";
 
 
 @Children({
-	Students,Counter
+	Students,Counter,Veggie
 })
 export default class extends BaseComponent {
 

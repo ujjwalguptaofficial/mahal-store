@@ -1,7 +1,6 @@
 import { Godam } from "godam";
-import { Component, emitStateChange, LIFECYCLE_EVENT } from "mahal";
-
-const arrayMethodsToWatch = ["push", "pop", "splice", "shift", "unshift", "reverse", "add"];
+import { Component, emitStateChange, getDataype, LIFECYCLE_EVENT } from "mahal";
+import { ARRAY_METHODS_TO_WATCH, OBJECT_METHODS_TO_WATCH } from "../constants";
 
 // tslint:disable-next-line
 export const State = function (key: string, room?: string): PropertyDecorator {
@@ -30,21 +29,27 @@ export const State = function (key: string, room?: string): PropertyDecorator {
                     emitChange(propName, newValue);
                 };
                 store.watch(key, onceCb);
-                if (Array.isArray(valueFromStore)) {
-                    arrayMethodsToWatch.forEach(methodName => {
-                        const arrayKey = `${key}.${methodName}`;
-                        const watchCb = (newValue) => {
-                            emitChange(arrayKey, newValue);
-                            // comp.setState(arrayKey, newValue);
-                        }
-                        store.watch(arrayKey, watchCb);
-                        methods.push(watchCb);
-                    })
+                let methodToWatch: string[] = [];
+                switch (getDataype(valueFromStore)) {
+                    case "array":
+                        methodToWatch = ARRAY_METHODS_TO_WATCH;
+                        break;
+                    case "object":
+                        methodToWatch = OBJECT_METHODS_TO_WATCH;
+                        break;
                 }
+                methodToWatch.forEach(methodName => {
+                    const arrayKey = `${key}.${methodName}`;
+                    const watchCb = (newValue) => {
+                        emitChange(arrayKey, newValue);
+                    }
+                    store.watch(arrayKey, watchCb);
+                    methods.push(watchCb);
+                })
 
                 comp.on(LIFECYCLE_EVENT.Destroy, () => {
                     store.unwatch(key, onceCb);
-                    arrayMethodsToWatch.forEach((methodName, i) => {
+                    methodToWatch.forEach((methodName, i) => {
                         const arrayKey = `${key}.${methodName}`;
                         store.unwatch(arrayKey, methods[i]);
                     });

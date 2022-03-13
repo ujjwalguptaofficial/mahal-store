@@ -5,7 +5,12 @@ export class State {
     lastStudentId = 0;
     students = [];
     fruits = [];
-    initialFruits = ["Banana", "Orange", "Apple", "Mango"]
+    initialFruits = ["Banana", "Orange", "Apple", "Mango"];
+
+    veggie = {};
+    initialVeggie = {
+        potato: "potato", peas: "peas", spinach: "spinach", brinjal: "brinjal"
+    }
 }
 
 export class RootMutation extends Mutation<State> {
@@ -32,6 +37,12 @@ export class RootMutation extends Mutation<State> {
     initializeFruits() {
         this.state.fruits = clone(
             this.state.initialFruits
+        );
+    }
+
+    initializeVeggie() {
+        this.state.veggie = clone(
+            this.state.initialVeggie
         );
     }
 }
@@ -84,6 +95,25 @@ export class RootExpression extends Expression<State> {
     @Computed('fruits')
     get fruitsLength() {
         return this.get('fruits').length;
+    }
+
+    @Computed('fruits')
+    get fruitsAsObject() {
+        const obj = {};
+        this.get('fruits').forEach(fruit => {
+            obj[fruit] = fruit;
+        });
+        return obj;
+    }
+
+    @Computed('veggie')
+    get veggieLength() {
+        return Object.keys(this.get('veggie')).length;
+    }
+
+    @Computed('veggie')
+    get veggieArray() {
+        return Object.values(this.get('veggie'));
     }
 }
 

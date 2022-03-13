@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/ujjwalguptaofficial/mahal-store#readme",
   "dependencies": {
-    "godam": "^1.1.0"
+    "godam": "^1.1.1"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",

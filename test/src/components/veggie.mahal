@@ -1,0 +1,33 @@
+<html>
+<div>
+	<p :for(fruit,index in veggie)>
+		{{index}}-{{fruit}}
+	</p>
+</div>
+</html>
+<script>
+import { clone, Component } from "mahal";
+import { Mutation, State, Expression } from "mahal-store";
+
+export default class extends Component {
+    @State("veggie")
+    veggie;
+
+    @Expression("veggieLength")
+    veggieLength;
+
+    @Expression("veggieArray")
+    veggieAsArray;
+
+    get initialVeggie() {
+        return clone(this.global.store.get("initialVeggie"));
+    }
+
+    @Mutation("initializeVeggie") setInitial;
+
+    onInit() {
+        this.setInitial();
+        window['veggie'] = this;
+    }
+}
+</script>

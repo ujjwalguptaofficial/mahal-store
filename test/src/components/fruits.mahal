@@ -16,6 +16,9 @@ export default class extends Component {
     @Expression("fruitsLength")
     fruitsLength;
 
+    @Expression("fruitsAsObject")
+    fruitsAsObject;
+
     get initialFruits() {
         return clone(this.global.store.get("initialFruits"));
     }

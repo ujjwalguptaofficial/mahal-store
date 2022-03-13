@@ -20,11 +20,37 @@ describe('Fruits', function () {
         value.forEach((fruit, index) => {
             expect(rows[index].innerHTML).equal(`${index}-${fruit}`)
         })
+
+        const obj = {};
+        value.forEach(fruit => {
+            obj[fruit] = fruit;
+        });
+        expect(component.getState('fruitsAsObject')).eql(obj);
     }
 
     it("check rendered value", function () {
         console.log("fruits", component['initialFruits']);
         checkFruitValue(component['initialFruits']);
+    })
+
+    it("push", async function () {
+        component['setInitial']();
+        await component.waitFor('update');
+        component['fruits'].push('ddd', 'amrud');
+        await component.waitFor('update');
+        const fruits = component['initialFruits'];
+        fruits.push('ddd', 'amrud');
+        checkFruitValue(fruits);
+    })
+
+    it("update", async function () {
+        component['setInitial']();
+        await component.waitFor('update');
+        component['fruits'][0] = 'ff';
+        await component.waitFor('update');
+        const fruits = component['initialFruits'];
+        fruits[0] = 'ff';
+        checkFruitValue(fruits);
     })
 
     it("splice value by 0,1", async function () {
