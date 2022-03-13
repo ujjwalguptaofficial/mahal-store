@@ -81,8 +81,8 @@ export class RootExpression extends Expression<State> {
         return students.find((qry) => qry.id === id);
     }
 
-    @Computed()
-    fruitsLength() {
+    @Computed('fruits')
+    get fruitsLength() {
         return this.get('fruits').length;
     }
 }

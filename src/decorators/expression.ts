@@ -1,5 +1,5 @@
 import { Godam } from "godam";
-import { Component, LIFECYCLE_EVENT } from "mahal";
+import { Component, emitStateChange, LIFECYCLE_EVENT } from "mahal";
 
 
 // tslint:disable-next-line
@@ -21,7 +21,7 @@ export const Expression = function (key: string, room?: string): PropertyDecorat
                 }
                 const watchKey = "expression." + key;
                 const cb = (newValue) => {
-                    comp['__emitStateChange__'](propName, newValue);
+                    emitStateChange.call(comp, propName, newValue);
                 };
                 store.watch(watchKey, cb);
                 comp.on(LIFECYCLE_EVENT.Destroy, () => {

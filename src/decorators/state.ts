@@ -1,5 +1,5 @@
 import { Godam } from "godam";
-import { Component, LIFECYCLE_EVENT, nextTick } from "mahal";
+import { Component, emitStateChange, LIFECYCLE_EVENT } from "mahal";
 
 const arrayMethodsToWatch = ["push", "pop", "splice", "shift", "unshift", "reverse", "add"];
 
@@ -24,7 +24,7 @@ export const State = function (key: string, room?: string): PropertyDecorator {
                 if (isEventSubscribed) {
                     return valueFromStore
                 }
-                const emitChange = comp['__emitStateChange__'].bind(this);
+                const emitChange = emitStateChange.bind(this);
 
                 const onceCb = (newValue) => {
                     emitChange(propName, newValue);

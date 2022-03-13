@@ -50,7 +50,7 @@ describe('Student', function () {
 
 
         rows = table.querySelectorAll('tr');
-        const students = component.resolve('students');
+        const students = component.getState('students');
         expect(rows).length(3);
         expect(students).length(1);
 
@@ -92,7 +92,7 @@ describe('Student', function () {
 
 
         rows = table.querySelectorAll('tr');
-        const students = component.resolve('students');
+        const students = component.getState('students');
         expect(rows).length(3);
         expect(students).length(1);
 
@@ -109,7 +109,7 @@ describe('Student', function () {
         rows = table.querySelectorAll('tr')
         row = rows[2];
 
-        const students = component.resolve('students');
+        const students = component.getState('students');
         expect(rows).length(2);
         expect(students).length(0);
 

@@ -16,6 +16,7 @@ describe('Fruits', function () {
     const checkFruitValue = (value) => {
         const rows = component.findAll('p');
         expect(value).length(rows.length);
+        expect(component.getState('fruitsLength')).equal(rows.length);
         value.forEach((fruit, index) => {
             expect(rows[index].innerHTML).equal(`${index}-${fruit}`)
         })
