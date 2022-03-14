@@ -46,6 +46,6 @@
   },
   "dependencies": {
     "mahal-html-compiler": "^1.0.0",
-    "mahal-store": "file:../mahal-store-1.0.0.tgz"
+    "mahal-store": "file:../mahal-store-1.1.1.tgz"
   }
 }

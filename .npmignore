@@ -3,3 +3,4 @@ src
 test
 build_helper
 extra
+*.tgz
