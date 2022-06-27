@@ -60,7 +60,7 @@ dateCreated: 12/2/2022
 				<button class="edit" on:click="()=>{edit(student.id)}">Edit</button>
 			</td>
 			<td>
-				<button class="delete" on:click="()=>{remove(student.id)}">Delete</button>
+				<button class="delete" on:click="remove(student.id)">Delete</button>
 			</td>
 		</tr>
 	</fragment>
@@ -138,6 +138,7 @@ export default class extends BaseComponent {
 
     async updateStudent() {
         const isStudentUpdated = this.updateStudentById(this.editStudent);
+        debugger;
         if (isStudentUpdated) {
             this.cancelUpdate();
         }
@@ -147,6 +148,10 @@ export default class extends BaseComponent {
 
     cancelUpdate() {
         this.editStudent = {};
+    }
+
+    onInit() {
+        window["studentComp"] = this;
     }
 }
 </script>

@@ -89,8 +89,8 @@ describe('Student', function () {
         btnUpdate.click();
         await component.waitFor('update');
 
-
-
+        const deleteButton = row.querySelector('.delete')
+        expect(deleteButton).to.not.be.null;
         rows = table.querySelectorAll('tr');
         const students = component.getState('students');
         expect(rows).length(3);
@@ -103,8 +103,9 @@ describe('Student', function () {
         const table = component.element;
         let rows = table.querySelectorAll('tr')
         let row = rows[2];
-        const btnEdit = row.querySelector('.delete') as HTMLButtonElement;
-        btnEdit.click();
+        const btnDelete = row.querySelector('.delete') as HTMLButtonElement;
+        console.log('btnDelete', row.innerHTML);
+        btnDelete.click();
         await component.waitFor('update');
         rows = table.querySelectorAll('tr')
         row = rows[2];

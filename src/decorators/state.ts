@@ -25,8 +25,8 @@ export const State = function (key: string, room?: string): PropertyDecorator {
                 }
                 const emitChange = emitStateChange.bind(this);
 
-                const onceCb = (newValue) => {
-                    emitChange(propName, newValue);
+                const onceCb = (newValue, oldValue) => {
+                    emitChange(propName, newValue, oldValue);
                 };
                 store.watch(key, onceCb);
                 let methodToWatch: string[] = [];
