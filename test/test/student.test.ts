@@ -88,8 +88,9 @@ describe('Student', function () {
 
         btnUpdate.click();
         await component.waitFor('update');
-
-        const deleteButton = row.querySelector('.delete')
+        rows = table.querySelectorAll('tr');
+        row = rows[2];
+        const deleteButton = row.querySelector('button.delete')
         expect(deleteButton).to.not.be.null;
         rows = table.querySelectorAll('tr');
         const students = component.getState('students');

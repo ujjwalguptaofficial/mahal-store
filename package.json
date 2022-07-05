@@ -1,6 +1,6 @@
 {
   "name": "mahal-store",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Store module for mahal framework.",
   "main": "dist/mahal-store.commonjs2.js",
   "types": "dist/ts/index.d.ts",
@@ -34,7 +34,7 @@
     "copy-webpack-plugin": "^6.1.1",
     "cross-env": "^7.0.3",
     "del-cli": "^4.0.1",
-    "mahal": "^1.3.0",
+    "mahal": "^1.3.2",
     "smart-banner-webpack-plugin": "^3.0.1",
     "ts-loader": "^7.0.4",
     "typescript": "^3.9.7",
@@ -42,6 +42,6 @@
     "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
-    "mahal": "^1.3.0"
+    "mahal": "^1.3.2"
   }
 }
