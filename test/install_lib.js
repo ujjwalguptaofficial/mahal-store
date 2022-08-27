@@ -9,7 +9,7 @@ const packageInfo = JSON.parse(content);
 if (packageInfo) {
     const version = packageInfo.version;
     console.log('version', version);
-    execSync(`npm i ../mahal-store-${version}.tgz`);
+    execSync(`npm i ../mahaljs-store-${version}.tgz`);
 }
 else {
     throw "no package found";

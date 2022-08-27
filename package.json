@@ -1,6 +1,6 @@
 {
-  "name": "mahal-store",
-  "version": "1.1.4",
+  "name": "@mahaljs/store",
+  "version": "1.1.5",
   "description": "Store module for mahal framework.",
   "main": "dist/mahal-store.commonjs2.js",
   "types": "dist/ts/index.d.ts",

@@ -7,7 +7,7 @@
 </html>
 <script>
 import { Component } from "mahal";
-import { Mutation, State, Expression } from "mahal-store";
+import { Mutation, State, Expression } from "@mahaljs/store";
 import { clone } from "../../test/utils";
 
 export default class extends Component {

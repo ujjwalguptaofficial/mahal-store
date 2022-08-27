@@ -68,7 +68,7 @@ dateCreated: 12/2/2022
 </html>
 <script>
 import { Reactive } from "mahal";
-import { Expression, State, Task } from "mahal-store";
+import { Expression, State, Task } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
 
 export default class extends BaseComponent {

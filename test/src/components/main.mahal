@@ -6,7 +6,7 @@
 <script>
 
 import { Children } from "mahal";
-import { State, Mutation, Expression } from "mahal-store";
+import { State, Mutation, Expression } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
 import Students from "./students.mahal";
 import Counter from "./counter.mahal";

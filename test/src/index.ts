@@ -1,6 +1,6 @@
 import { Mahal } from "mahal";
 import Main from "./components/main.mahal";
-import MahalStore from "mahal-store";
+import MahalStore from "@mahaljs/store";
 import store from "../store";
 
 export const app = new Mahal(Main, '#app');
