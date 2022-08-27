@@ -1,6 +1,6 @@
 import Student from "../src/components/students.mahal";
 import { expect } from "chai";
-import { mount, setInputValue } from "mahal-test-utils";
+import { mount, setInputValue } from "@mahaljs/test-utils";
 import { app } from "../src";
 
 describe('Student', function () {

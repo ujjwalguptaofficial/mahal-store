@@ -1,8 +1,7 @@
 import FruitComponent from "../src/components/veggie.mahal";
 import { app } from "../src/index";
-import { clone } from "mahal";
 import { expect } from "chai";
-import { mount } from "mahal-test-utils";
+import { mount } from "@mahaljs/test-utils";
 
 describe('Veggie', function () {
 

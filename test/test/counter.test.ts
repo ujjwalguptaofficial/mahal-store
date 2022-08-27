@@ -1,7 +1,7 @@
 import Counter from "../src/components/counter.mahal";
 import { app } from "../src/index";
 import { expect } from "chai";
-import { initiate } from "mahal-test-utils";
+import { initiate } from "@mahaljs/test-utils";
 
 describe('Counter', function () {
 

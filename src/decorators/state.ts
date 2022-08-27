@@ -1,5 +1,5 @@
 import { Godam } from "godam";
-import { Component, emitStateChange, getDataype, LIFECYCLE_EVENT } from "mahal";
+import { Component, emitStateChange, getDataype } from "mahal";
 import { ARRAY_METHODS_TO_WATCH, OBJECT_METHODS_TO_WATCH } from "../constants";
 
 // tslint:disable-next-line
@@ -47,7 +47,7 @@ export const State = function (key: string, room?: string): PropertyDecorator {
                     methods.push(watchCb);
                 })
 
-                comp.on(LIFECYCLE_EVENT.Destroy, () => {
+                comp.on("destroy", () => {
                     store.unwatch(key, onceCb);
                     methodToWatch.forEach((methodName, i) => {
                         const arrayKey = `${key}.${methodName}`;

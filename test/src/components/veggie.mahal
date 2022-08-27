@@ -6,8 +6,9 @@
 </div>
 </html>
 <script>
-import { clone, Component } from "mahal";
+import { Component } from "mahal";
 import { Mutation, State, Expression } from "mahal-store";
+import { clone } from "../../test/utils";
 
 export default class extends Component {
     @State("veggie")
@@ -27,7 +28,7 @@ export default class extends Component {
 
     onInit() {
         this.setInitial();
-        window['veggie'] = this;
+        window["veggie"] = this;
     }
 }
 </script>

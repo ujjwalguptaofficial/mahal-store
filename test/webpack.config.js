@@ -1,6 +1,6 @@
 const path = require('path');
 console.log("path", path.resolve(__dirname, 'bin/'))
-const MahalPlugin = require('mahal-webpack-loader/lib/plugin');
+const MahalPlugin = require('@mahaljs/webpack-loader/lib/plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -13,7 +13,7 @@ module.exports = {
             test: /\.mahal?$/,
             // loader: 'mahal-webpack-loader',
             use: {
-                loader: require.resolve('mahal-webpack-loader')
+                loader: require.resolve('@mahaljs/webpack-loader')
             },
             // use: [
             //     {
