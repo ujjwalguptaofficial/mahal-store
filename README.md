@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/@mahaljs%2Fstore.svg)](https://badge.fury.io/js/@mahaljs%2Fstore)
+[![TEST](https://github.com/ujjwalguptaofficial/mahal-store/actions/workflows/test.yml/badge.svg)](https://github.com/ujjwalguptaofficial/mahal-store/actions/workflows/test.yml)
 
 # mahal-store
 

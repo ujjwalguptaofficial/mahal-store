@@ -14,7 +14,8 @@
     "build:all": "npm run build:dev && npm run build:prod",
     "deploy": "npm run clean && npm run build:all && npm run pack:test",
     "clean": "del dist",
-    "prepublishOnly": "npm run deploy"
+    "prepublishOnly": "npm run deploy",
+    "build:ci": "npm run deploy"
   },
   "repository": {
     "type": "git",
