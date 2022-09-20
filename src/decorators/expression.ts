@@ -1,9 +1,7 @@
 import { Godam } from "godam";
 import { Component, emitStateChange } from "mahal";
 
-
-// tslint:disable-next-line
-export const Expression = function (key: string, room?: string): PropertyDecorator {
+export const expression = function (key: string, room?: string): PropertyDecorator {
     if (room) {
         key = key + "@" + room;
     }

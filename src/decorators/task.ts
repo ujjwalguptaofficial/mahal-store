@@ -1,8 +1,7 @@
 import { Godam } from "godam";
 import { Component } from "mahal";
 
-// tslint:disable-next-line
-export const Task = (key: string, room?: string): PropertyDecorator => {
+export const task = (key: string, room?: string): PropertyDecorator => {
     if (room) {
         key = key + "@" + room;
     }

@@ -1,9 +1,15 @@
 {
   "name": "@mahaljs/store",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "Store module for mahal framework.",
   "main": "dist/mahal-store.commonjs2.js",
   "types": "dist/ts/index.d.ts",
+  "keywords": [
+    "mahal",
+    "store",
+    "library",
+    "framework"
+  ],
   "scripts": {
     "test": "cd test && npm run install:test",
     "pack:test": "npm pack && npm run test",
@@ -29,20 +35,20 @@
   },
   "homepage": "https://github.com/ujjwalguptaofficial/mahal-store#readme",
   "dependencies": {
-    "godam": "^1.1.2"
+    "godam": "^1.2.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
     "copy-webpack-plugin": "^6.1.1",
     "cross-env": "^7.0.3",
     "del-cli": "^4.0.1",
-    "mahal": "^1.4.3",
+    "mahal": "^1.5.0",
     "ts-loader": "^7.0.4",
     "typescript": "^3.9.7",
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
-    "mahal": "^1.4.3"
+    "mahal": "^1.5.0"
   }
 }

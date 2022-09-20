@@ -67,30 +67,30 @@ dateCreated: 12/2/2022
 </table>
 </html>
 <script>
-import { Reactive } from "mahal";
-import { Expression, State, Task } from "@mahaljs/store";
+import { reactive } from "mahal";
+import { expression, state, task } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
 
 export default class extends BaseComponent {
-    @State("students")
+    @state("students")
     students;
 
-    @Expression("studentById")
+    @expression("studentById")
     studentById;
 
-    @Task("removeStudent")
+    @task("removeStudent")
     removeStudent;
 
-    @Task("updateStudent")
+    @task("updateStudent")
     updateStudentById;
 
-    @Task("addStudent")
+    @task("addStudent")
     addStudent;
 
-    @Reactive
+    @reactive
     newStudent = {};
 
-    @Reactive
+    @reactive
     editStudent = {};
 
     constructor() {

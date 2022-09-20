@@ -7,24 +7,24 @@
 </html>
 <script>
 import { Component } from "mahal";
-import { Mutation, State, Expression } from "@mahaljs/store";
+import { mutation, state, expression } from "@mahaljs/store";
 import { clone } from "../../test/utils";
 
 export default class extends Component {
-    @State("fruits")
+    @state("fruits")
     fruits;
 
-    @Expression("fruitsLength")
+    @expression("fruitsLength")
     fruitsLength;
 
-    @Expression("fruitsAsObject")
+    @expression("fruitsAsObject")
     fruitsAsObject;
 
     get initialFruits() {
         return clone(this.global.store.get("initialFruits"));
     }
 
-    @Mutation("initializeFruits") setInitial;
+    @mutation("initializeFruits") setInitial;
 
     onInit() {
         this.setInitial();

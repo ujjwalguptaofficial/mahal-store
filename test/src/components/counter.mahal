@@ -14,15 +14,15 @@ dateCreated:
 </html>
 
 <script>
-import { Component, Computed, Reactive } from "mahal";
-import { State, Mutation, Expression } from "@mahaljs/store";
+import { Component, computed, reactive } from "mahal";
+import { state, mutation, expression } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
 
 export default class extends BaseComponent {
-    @State("count")
+    @state("count")
     counter;
 
-    @Expression('countPlus5')
+    @expression('countPlus5')
     countPlus5;
 
     increment() {
@@ -30,7 +30,7 @@ export default class extends BaseComponent {
         console.log("triggered increment", this.store.get("count"));
     }
 
-    @Mutation("decrementCount")
+    @mutation("decrementCount")
     decrement;
 }
 </script>

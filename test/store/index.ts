@@ -1,4 +1,4 @@
-import { Godam, Mutation, Expression, Task, Computed, clone } from "godam";
+import { Godam, computed, clone, Task, Expression, Mutation } from "godam";
 
 export class State {
     count = 0;
@@ -92,12 +92,12 @@ export class RootExpression extends Expression<State> {
         return students.find((qry) => qry.id === id);
     }
 
-    @Computed('fruits')
+    @computed('fruits')
     get fruitsLength() {
         return this.get('fruits').length;
     }
 
-    @Computed('fruits')
+    @computed('fruits')
     get fruitsAsObject() {
         const obj = {};
         this.get('fruits').forEach(fruit => {
@@ -106,12 +106,12 @@ export class RootExpression extends Expression<State> {
         return obj;
     }
 
-    @Computed('veggie')
+    @computed('veggie')
     get veggieLength() {
         return Object.keys(this.get('veggie')).length;
     }
 
-    @Computed('veggie')
+    @computed('veggie')
     get veggieArray() {
         return Object.values(this.get('veggie'));
     }

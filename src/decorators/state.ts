@@ -2,8 +2,7 @@ import { Godam } from "godam";
 import { Component, emitStateChange, getDataype } from "mahal";
 import { ARRAY_METHODS_TO_WATCH, OBJECT_METHODS_TO_WATCH } from "../constants";
 
-// tslint:disable-next-line
-export const State = function (key: string, room?: string): PropertyDecorator {
+export const state = function (key: string, room?: string): PropertyDecorator {
     if (room) {
         key = key + "@" + room;
     }

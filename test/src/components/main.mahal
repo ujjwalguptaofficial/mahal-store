@@ -5,15 +5,15 @@
 </html>
 <script>
 
-import { Children } from "mahal";
-import { State, Mutation, Expression } from "@mahaljs/store";
+import { children } from "mahal";
+import { state, mutation, expression } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
 import Students from "./students.mahal";
 import Counter from "./counter.mahal";
 import Veggie from "./veggie.mahal";
 
 
-@Children({
+@children({
 	Students,Counter,Veggie
 })
 export default class extends BaseComponent {
