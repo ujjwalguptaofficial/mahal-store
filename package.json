@@ -2,7 +2,7 @@
   "name": "@mahaljs/store",
   "version": "1.2.0",
   "description": "Store module for mahal framework.",
-  "main": "dist/mahal-store.commonjs2.js",
+  "main": "dist/npm.export.js",
   "types": "dist/ts/index.d.ts",
   "keywords": [
     "mahal",
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/ujjwalguptaofficial/mahal-store#readme",
   "dependencies": {
-    "godam": "^1.2.1"
+    "godam": "^1.2.6"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
