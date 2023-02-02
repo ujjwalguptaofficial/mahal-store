@@ -5,7 +5,6 @@ export const expression = function (key: string, room?: string): PropertyDecorat
     if (room) {
         key = key + "@" + room;
     }
-    let isEventSubscribed = false;
     return (target: any, propName: string) => {
         Object.defineProperty(target, propName, {
             get() {
@@ -14,7 +13,7 @@ export const expression = function (key: string, room?: string): PropertyDecorat
                 store.shouldCallExpression = false;
                 const expressionValue = store.eval(key);
                 store.shouldCallExpression = true;
-                if (isEventSubscribed) {
+                if (comp['__storeExpressionSubscribed__']) {
                     return expressionValue;
                 }
                 const watchKey = "expression." + key;
@@ -24,9 +23,8 @@ export const expression = function (key: string, room?: string): PropertyDecorat
                 store.watch(watchKey, cb);
                 comp.on("destroy", () => {
                     store.unwatch(watchKey, cb);
-                    isEventSubscribed = false;
                 })
-                isEventSubscribed = true;
+                comp['__storeExpressionSubscribed__'] = true;
                 return expressionValue;
             }
         })

@@ -7,7 +7,6 @@ export const state = function (key: string, room?: string): PropertyDecorator {
         key = key + "@" + room;
     }
     let methods = [];
-    let isEventSubscribed = false;
     return (target: any, propName: string) => {
         Object.defineProperty(target, propName, {
             get() {
@@ -19,7 +18,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                     }
                 }
                 const valueFromStore = store.get(key);
-                if (isEventSubscribed) {
+                if (comp['__storeStateSubscribed__']) {
                     return valueFromStore
                 }
                 const emitChange = emitStateChange.bind(this);
@@ -53,9 +52,8 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                         store.unwatch(arrayKey, methods[i]);
                     });
                     methods = [];
-                    isEventSubscribed = false;
                 })
-                isEventSubscribed = true;
+                comp['__storeStateSubscribed__'] = true;
                 return valueFromStore;
             }
         })
