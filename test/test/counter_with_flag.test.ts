@@ -40,5 +40,28 @@ describe('Counter With Flag', function () {
         expect(component.find('#divCounter5').innerHTML).equal('9');
         expect(component.find('#divCounter').innerHTML).equal('4');
     });
+
+    it('set flag to false', async () => {
+        component['flag'] = false;
+        await component.waitFor('update');
+        expect(component.find('#divCounter5')).to.be.null;
+    })
+
+    it('set flag to true', async () => {
+        component['flag'] = true;
+        await component.waitFor('update');
+        expect(component.find('#divCounter5').innerHTML).equal('9');
+        expect(component.find('#divCounter').innerHTML).equal('4');
+    })
+
+    it('decrement', async function () {
+        const btn = component.find("#btnDecrement");
+        btn.click();
+        await new Promise((res) => {
+            setTimeout(res, 500);
+        });
+        expect(component.find('#divCounter5').innerHTML).equal('8');
+        expect(component.find('#divCounter').innerHTML).equal('3');
+    });
 });
 
