@@ -53,6 +53,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                         store.unwatch(arrayKey, methods[i]);
                     });
                     methods = [];
+                    isEventSubscribed = false;
                 })
                 isEventSubscribed = true;
                 return valueFromStore;

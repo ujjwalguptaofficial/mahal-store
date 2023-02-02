@@ -1,30 +1,23 @@
 <html>
 <div>
 	<span>{{flag}}</span>
-	<Counter />
-	<CounterWithFlag />
+	<Counter :if(flag) />
 </div>
 </html>
 <script>
 import { children, reactive } from "mahal";
 import { state, mutation, expression } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
-import Students from "./students.mahal";
 import Counter from "./counter.mahal";
-import Veggie from "./veggie.mahal";
-import CounterWithFlag from "./counter_with_flag.mahal";
 
 @children({
-    Students,
     Counter,
-    Veggie,
-    CounterWithFlag,
 })
 export default class extends BaseComponent {
     @reactive flag = true;
 
     onInit() {
-        window["main"] = this;
+        window["counterWithFlag"] = this;
     }
 }
 </script>

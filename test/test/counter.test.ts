@@ -39,5 +39,9 @@ describe('Counter', function () {
         expect(component.find('#divCounter5').innerHTML).equal('9');
         expect(component.find('#divCounter').innerHTML).equal('4');
     });
+
+    it('component destroy', () => {
+        component.element.remove();
+    })
 });
 

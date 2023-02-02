@@ -24,6 +24,7 @@ export const expression = function (key: string, room?: string): PropertyDecorat
                 store.watch(watchKey, cb);
                 comp.on("destroy", () => {
                     store.unwatch(watchKey, cb);
+                    isEventSubscribed = false;
                 })
                 isEventSubscribed = true;
                 return expressionValue;

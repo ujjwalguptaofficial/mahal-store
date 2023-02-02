@@ -22,7 +22,7 @@ export default class extends BaseComponent {
     @state("count")
     counter;
 
-    @expression('countPlus5')
+    @expression("countPlus5")
     countPlus5;
 
     increment() {
@@ -32,6 +32,14 @@ export default class extends BaseComponent {
 
     @mutation("decrementCount")
     decrement;
+
+    onInit() {
+        // window["counter"] = this;
+        this.on("update", () => {
+            // console.log("updated");
+            // this.emit("update");
+        });
+    }
 }
 </script>
 
