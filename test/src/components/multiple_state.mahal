@@ -1,0 +1,46 @@
+---times
+name: count.mahal
+description:
+dateCreated:
+---
+
+<html>
+<div>
+	<div id="divFirstName">{{firstName}}</div>
+	<div id="divLastName">{{lastName}}</div>
+	
+	<div id="divFullName">{{fullName}}</div>
+	<div id="divFullNameInReverse">{{fullNameInReverse}}</div>
+</div>
+</html>
+
+<script>
+import { Component, computed, reactive } from "mahal";
+import { state, mutation, expression } from "@mahaljs/store";
+import { BaseComponent } from "./base_component";
+
+export default class extends BaseComponent {
+    @state("firstName")
+    firstName;
+
+    @state("lastName")
+    lastName;
+
+    @expression("fullName")
+    fullName;
+
+    @expression("fullNameInReverse")
+    fullNameInReverse;
+
+    @mutation("firstName")
+    setFirstName;
+
+    @mutation("lastName")
+    setLastName;
+}
+</script>
+
+ 
+
+<style>
+</style>

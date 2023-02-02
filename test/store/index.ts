@@ -11,9 +11,15 @@ export class State {
     initialVeggie = {
         potato: "potato", peas: "peas", spinach: "spinach", brinjal: "brinjal"
     }
+
+    firstName = "";
+    lastName = "";
 }
 
 export class RootMutation extends Mutation<State> {
+    firstName = this.createMutation("firstName");
+    lastName = this.createMutation("lastName");
+
     count(value) {
         this.state.count = value;
     }
@@ -114,6 +120,16 @@ export class RootExpression extends Expression<State> {
     @computed('veggie')
     get veggieArray() {
         return Object.values(this.get('veggie'));
+    }
+
+    @computed('firstName', 'lastName')
+    get fullName() {
+        return this.get('firstName') + ' ' + this.get('lastName');
+    }
+
+    @computed('firstName', 'lastName')
+    get fullNameInReverse() {
+        return this.get('lastName') + ' ' + this.get('firstName');
     }
 }
 

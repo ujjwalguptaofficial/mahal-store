@@ -6,6 +6,8 @@ export const expression = function (key: string, room?: string): PropertyDecorat
         key = key + "@" + room;
     }
     return (target: any, propName: string) => {
+        const expFlag = `__storeExp_${propName}_Subscribed__`;
+
         Object.defineProperty(target, propName, {
             get() {
                 const comp: Component = this;
@@ -13,7 +15,7 @@ export const expression = function (key: string, room?: string): PropertyDecorat
                 store.shouldCallExpression = false;
                 const expressionValue = store.eval(key);
                 store.shouldCallExpression = true;
-                if (comp['__storeExpressionSubscribed__']) {
+                if (comp[expFlag]) {
                     return expressionValue;
                 }
                 const watchKey = "expression." + key;
@@ -24,7 +26,7 @@ export const expression = function (key: string, room?: string): PropertyDecorat
                 comp.on("destroy", () => {
                     store.unwatch(watchKey, cb);
                 })
-                comp['__storeExpressionSubscribed__'] = true;
+                comp[expFlag] = true;
                 return expressionValue;
             }
         })

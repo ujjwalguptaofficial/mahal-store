@@ -8,6 +8,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
     }
     let methods = [];
     return (target: any, propName: string) => {
+        const stateFlag = `__storeState_${propName}_Subscribed__`;
         Object.defineProperty(target, propName, {
             get() {
                 const comp: Component = this;
@@ -18,7 +19,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                     }
                 }
                 const valueFromStore = store.get(key);
-                if (comp['__storeStateSubscribed__']) {
+                if (comp[stateFlag]) {
                     return valueFromStore
                 }
                 const emitChange = emitStateChange.bind(this);
@@ -53,7 +54,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                     });
                     methods = [];
                 })
-                comp['__storeStateSubscribed__'] = true;
+                comp[stateFlag] = true;
                 return valueFromStore;
             }
         })

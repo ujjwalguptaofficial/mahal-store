@@ -45,6 +45,6 @@
     "webpack-dev-server": "^4.3.0"
   },
   "dependencies": {
-    "@mahaljs/store": "file:../mahaljs-store-1.2.1.tgz"
+    "@mahaljs/store": "file:../mahaljs-store-1.2.2.tgz"
   }
 }
