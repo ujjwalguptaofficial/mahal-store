@@ -1,3 +1,4 @@
+[![OSNFT](https://img.shields.io/badge/OSNFT-Buy%20NFT-yellowgreen)](https://osnft.app/nft/mahal-store@ujjwalguptaofficial)
 [![npm version](https://badge.fury.io/js/@mahaljs%2Fstore.svg)](https://badge.fury.io/js/@mahaljs%2Fstore)
 [![TEST](https://github.com/ujjwalguptaofficial/mahal-store/actions/workflows/test.yml/badge.svg)](https://github.com/ujjwalguptaofficial/mahal-store/actions/workflows/test.yml)
 

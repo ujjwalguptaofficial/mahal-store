@@ -7,7 +7,6 @@ import { removeEl } from "mahal";
 describe('Counter', function () {
 
     let component: MultipleState;
-    let watcherLength;
     const events = {
         'firstName': 0,
         'lastName': 0,

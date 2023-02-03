@@ -6,7 +6,7 @@
 </div>
 </html>
 <script>
-import { Component } from "mahal";
+import { Component, removeEl } from "mahal";
 import { mutation, state, expression } from "@mahaljs/store";
 import { clone } from "../../test/utils";
 
@@ -28,6 +28,10 @@ export default class extends Component {
 
     onInit() {
         this.setInitial();
+    }
+
+    destroyEl() {
+        removeEl(this.element);
     }
 }
 </script>

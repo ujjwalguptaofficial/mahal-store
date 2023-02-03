@@ -8,7 +8,16 @@ describe('Fruits', function () {
 
     let component: FruitComponent;
 
+    const events = {
+        'fruits': 0,
+        'expression.fruitsLength': 0,
+        'expression.fruitsAsObject': 0
+    };
+
     before(async function () {
+        for (const key in events) {
+            events[key] = app.global.store.__watchBus__._events[key]?.size || 0
+        }
         const mountWithBind: typeof mount = mount.bind(app);
         component = await mountWithBind(FruitComponent);
     });
@@ -142,6 +151,18 @@ describe('Fruits', function () {
         fruits.reverse();
         checkFruitValue(fruits);
     });
+
+    it('component destroy', async () => {
+        component['destroyEl']();
+        // await component.waitFor('update');
+        await new Promise((res) => {
+            setTimeout(res, 100);
+        });
+        const evs = app.global.store.__watchBus__._events;
+        for (const key in events) {
+            expect(events[key]).equal(evs[key].size)
+        }
+    })
 
 });
 
