@@ -1,8 +1,9 @@
 <html>
 <div>
 	<span>{{flag}}</span>
-	<Counter />
-	<CounterWithFlag />
+	<!-- <Counter /> -->
+	<!-- <CounterWithFlag :if(flag) /> -->
+	<MultipleState />
 </div>
 </html>
 <script>
@@ -13,12 +14,14 @@ import Students from "./students.mahal";
 import Counter from "./counter.mahal";
 import Veggie from "./veggie.mahal";
 import CounterWithFlag from "./counter_with_flag.mahal";
+import MultipleState from "./multiple_state.mahal";
 
 @children({
     Students,
     Counter,
     Veggie,
     CounterWithFlag,
+    MultipleState,
 })
 export default class extends BaseComponent {
     @reactive flag = true;

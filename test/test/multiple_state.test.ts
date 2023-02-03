@@ -2,12 +2,23 @@ import MultipleState from "../src/components/multiple_state.mahal";
 import { app } from "../src/index";
 import { expect } from "chai";
 import { initiate, setInputValue } from "@mahaljs/test-utils";
+import { removeEl } from "mahal";
 
 describe('Counter', function () {
 
     let component: MultipleState;
+    let watcherLength;
+    const events = {
+        'firstName': 0,
+        'lastName': 0,
+        'expression.fullName': 0,
+        'expression.fullNameInReverse': 0
+    };
 
     before(async function () {
+        for (const key in events) {
+            events[key] = app.global.store.__watchBus__._events[key]?.size || 0
+        }
         component = await initiate.call(app, MultipleState);
     });
 
@@ -42,17 +53,22 @@ describe('Counter', function () {
         expect(component.find('#divFullNameInReverse').innerHTML).equal('Gupta Ujjwal');
     });
 
-    // it('decrement', async function () {
-    //     const btn = component.find("#btnDecrement");
-    //     btn.click();
-    //     await component.waitFor('update');
-    //     expect(component['counter']).equal(4);
-    //     expect(component.find('#divCounter5').innerHTML).equal('9');
-    //     expect(component.find('#divCounter').innerHTML).equal('4');
-    // });
-
-    // it('component destroy', () => {
-    //     component.element.remove();
+    // it('check no of watch after', async () => {
+    //     expect(
+    //         Object.keys(component.global.store.__watchBus__._events)
+    //     ).length(20);
     // })
+
+    it('component destroy', async () => {
+        removeEl(component.element);
+        // await component.waitFor('update');
+        await new Promise((res) => {
+            setTimeout(res, 100);
+        });
+        const evs = app.global.store.__watchBus__._events;
+        for (const key in events) {
+            expect(events[key]).equal(evs[key].size)
+        }
+    })
 });
 

@@ -6,7 +6,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
     if (room) {
         key = key + "@" + room;
     }
-    let methods = [];
+
     return (target: any, propName: string) => {
         const stateFlag = `__storeState_${propName}_Subscribed__`;
         Object.defineProperty(target, propName, {
@@ -37,24 +37,25 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                         methodToWatch = OBJECT_METHODS_TO_WATCH;
                         break;
                 }
+                comp[stateFlag] = new Map();
                 methodToWatch.forEach(methodName => {
                     const arrayKey = `${key}.${methodName}`;
                     const watchCb = (newValue) => {
                         emitChange(arrayKey, newValue);
                     }
                     store.watch(arrayKey, watchCb);
-                    methods.push(watchCb);
+                    (comp[stateFlag] as Map<string, Function>).set(arrayKey, watchCb);
                 })
 
                 comp.on("destroy", () => {
+                    // unwatch state key
                     store.unwatch(key, onceCb);
-                    methodToWatch.forEach((methodName, i) => {
-                        const arrayKey = `${key}.${methodName}`;
-                        store.unwatch(arrayKey, methods[i]);
+                    // unwatch array methods
+                    (comp[stateFlag] as Map<string, Function>).forEach((method, arrayKey) => {
+                        store.unwatch(arrayKey, method);
                     });
-                    methods = [];
                 })
-                comp[stateFlag] = true;
+
                 return valueFromStore;
             }
         })

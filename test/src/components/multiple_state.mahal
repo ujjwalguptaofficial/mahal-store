@@ -1,4 +1,4 @@
----times
+---
 name: count.mahal
 description:
 dateCreated:
@@ -15,7 +15,7 @@ dateCreated:
 </html>
 
 <script>
-import { Component, computed, reactive } from "mahal";
+import { Component, computed, removeEl } from "mahal";
 import { state, mutation, expression } from "@mahaljs/store";
 import { BaseComponent } from "./base_component";
 
@@ -37,6 +37,17 @@ export default class extends BaseComponent {
 
     @mutation("lastName")
     setLastName;
+
+    destroyEl() {
+        removeEl(this.element);
+    }
+
+    onInit() {
+        window["multipleState"] = this;
+        this.on("destroy", () => {
+            console.log("destroyed");
+        });
+    }
 }
 </script>
 
