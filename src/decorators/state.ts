@@ -28,7 +28,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                 const onceCb = (newValue, oldValue) => {
                     emitChange(propName, newValue, oldValue);
                 };
-                store.watch(key, onceCb);
+                store.watch(keyWithRoom, onceCb);
                 let methodToWatch: string[] = [];
                 switch (getDataype(valueFromStore)) {
                     case "array":
@@ -53,7 +53,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
 
                 comp.on("destroy", () => {
                     // unwatch state key
-                    store.unwatch(key, onceCb);
+                    store.unwatch(keyWithRoom, onceCb);
                     // unwatch array methods
                     (comp[stateFlag] as Map<string, Function>).forEach((method, arrayKey) => {
                         store.unwatch(arrayKey, method);
