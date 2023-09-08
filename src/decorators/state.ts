@@ -3,8 +3,9 @@ import { Component, emitStateChange, getDataype } from "mahal";
 import { ARRAY_METHODS_TO_WATCH, OBJECT_METHODS_TO_WATCH } from "../constants";
 
 export const state = function (key: string, room?: string): PropertyDecorator {
+    let keyWithRoom = key;
     if (room) {
-        key = key + "@" + room;
+        keyWithRoom = key + "@" + room;
     }
 
     return (target: any, propName: string) => {
@@ -18,7 +19,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                         throw "store is not defined, please install 'mahal-store' plugin.";
                     }
                 }
-                const valueFromStore = store.get(key);
+                const valueFromStore = store.get(keyWithRoom);
                 if (comp[stateFlag]) {
                     return valueFromStore
                 }
@@ -39,7 +40,10 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                 }
                 comp[stateFlag] = new Map();
                 methodToWatch.forEach(methodName => {
-                    const arrayKey = `${key}.${methodName}`;
+                    let arrayKey = `${key}.${methodName}`;
+                    if (room) {
+                        arrayKey += `@${room}`
+                    }
                     const watchCb = (newValue) => {
                         emitChange(arrayKey, newValue);
                     }
