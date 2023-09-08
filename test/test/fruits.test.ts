@@ -45,7 +45,7 @@ describe('Fruits', function () {
     it("push", async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].push('ddd', 'amrud');
+        component['fruitList'].push('ddd', 'amrud');
         await component.waitFor('update');
         const fruits = component['initialFruits'];
         fruits.push('ddd', 'amrud');
@@ -55,7 +55,7 @@ describe('Fruits', function () {
     it("update", async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'][0] = 'ff';
+        component['fruitList'][0] = 'ff';
         await component.waitFor('update');
         const fruits = component['initialFruits'];
         fruits[0] = 'ff';
@@ -65,7 +65,7 @@ describe('Fruits', function () {
     it("splice value by 0,1", async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].splice(0, 1);
+        component['fruitList'].splice(0, 1);
         await component.waitFor('update');
         const fruits = component['initialFruits'];
         fruits.splice(0, 1);
@@ -75,7 +75,7 @@ describe('Fruits', function () {
     it("splice value by 2,1", async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].splice(2, 1);
+        component['fruitList'].splice(2, 1);
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.splice(2, 1);
@@ -85,7 +85,7 @@ describe('Fruits', function () {
     it(`splice value by 2,1, "Lemon", "Kiwi" `, async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].splice(2, 1, "Lemon", "Kiwi");
+        component['fruitList'].splice(2, 1, "Lemon", "Kiwi");
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.splice(2, 1, "Lemon", "Kiwi");
@@ -95,7 +95,7 @@ describe('Fruits', function () {
     it(`splice value by 2,0, "Lemon", "Kiwi" `, async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].splice(2, 0, "Lemon", "Kiwi");
+        component['fruitList'].splice(2, 0, "Lemon", "Kiwi");
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.splice(2, 0, "Lemon", "Kiwi");
@@ -105,7 +105,7 @@ describe('Fruits', function () {
     it(`splice value by 2,2, "Lemon", "Kiwi" `, async function () {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].splice(2, 2, "Lemon", "Kiwi");
+        component['fruitList'].splice(2, 2, "Lemon", "Kiwi");
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.splice(2, 2, "Lemon", "Kiwi");
@@ -115,7 +115,7 @@ describe('Fruits', function () {
     it('pop items', async () => {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].pop();
+        component['fruitList'].pop();
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.pop();
@@ -125,7 +125,7 @@ describe('Fruits', function () {
     it('shift items', async () => {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].shift();
+        component['fruitList'].shift();
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.shift();
@@ -135,7 +135,7 @@ describe('Fruits', function () {
     it('unshift items', async () => {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].unshift('amrud');
+        component['fruitList'].unshift('amrud');
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.unshift('amrud');
@@ -145,7 +145,7 @@ describe('Fruits', function () {
     it('reverse items', async () => {
         component['setInitial']();
         await component.waitFor('update');
-        component['fruits'].reverse();
+        component['fruitList'].reverse();
         await component.waitFor('update');
         const fruits = clone(component['initialFruits']);
         fruits.reverse();

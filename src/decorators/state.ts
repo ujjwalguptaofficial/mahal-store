@@ -45,7 +45,7 @@ export const state = function (key: string, room?: string): PropertyDecorator {
                         arrayKey += `@${room}`
                     }
                     const watchCb = (newValue) => {
-                        emitChange(arrayKey, newValue);
+                        emitChange(`${propName}.${methodName}`, newValue);
                     }
                     store.watch(arrayKey, watchCb);
                     (comp[stateFlag] as Map<string, Function>).set(arrayKey, watchCb);

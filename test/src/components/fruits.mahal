@@ -1,6 +1,6 @@
 <html>
 <div>
-	<p :for(fruit,index in fruits)>
+	<p :for(fruit,index in fruitList)>
 		{{index}}-{{fruit}}
 	</p>
 </div>
@@ -12,7 +12,7 @@ import { clone } from "../../test/utils";
 
 export default class extends Component {
     @state("fruits")
-    fruits;
+    fruitList;
 
     @expression("fruitsLength")
     fruitsLength;
